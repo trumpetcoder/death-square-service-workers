@@ -9,6 +9,9 @@ import { AppComponent } from './app.component';
 import { TieFighterComponent } from './tie-fighter/tie-fighter.component';
 import { InfoWindowComponent } from './info-window/info-window.component';
 
+import { ServiceWorkerModule } from '@angular/service-worker'; //Added for service worker
+import { environment } from '../environments/environment'; //Added for service worker
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,12 +20,17 @@ import { InfoWindowComponent } from './info-window/info-window.component';
   ],
   imports: [
     BrowserModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),//linked to line 12+13
     FormsModule,
     HttpModule,
     InternalDefensesModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+  // CheckForUpdateService,
+  // LogUpdateService,
+  // PromptUpdateService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
